@@ -1,12 +1,20 @@
-'use client';
+"use client";
 
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import MusicToggleButton from './MusicToggleButton';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import MusicToggleButton from "./MusicToggleButton";
 
-const AUDIO_SRC = '/music/wedding-theme.mp3';
-const STORAGE_MUTED = 'music-muted';
-const STORAGE_HAS_MUTED = 'music-has-muted';
-const TARGET_VOLUME = 0.85;
+const AUDIO_SRC = "/music/dumaloy.mp3";
+const STORAGE_MUTED = "music-muted";
+const STORAGE_HAS_MUTED = "music-has-muted";
+const TARGET_VOLUME = 0.1;
 
 export type MusicContextValue = {
   isPlaying: boolean;
@@ -22,7 +30,7 @@ const MusicContext = createContext<MusicContextValue | null>(null);
 export const useBackgroundMusic = () => {
   const context = useContext(MusicContext);
   if (!context) {
-    throw new Error('useBackgroundMusic must be used within BackgroundMusic');
+    throw new Error("useBackgroundMusic must be used within BackgroundMusic");
   }
   return context;
 };
@@ -43,9 +51,9 @@ export function BackgroundMusic({ children }: { children: React.ReactNode }) {
     const storedHasMuted = window.localStorage.getItem(STORAGE_HAS_MUTED);
 
     if (storedMuted !== null) {
-      setIsMuted(storedMuted === 'true');
+      setIsMuted(storedMuted === "true");
     }
-    if (storedHasMuted === 'true') {
+    if (storedHasMuted === "true") {
       setHasUserMuted(true);
     }
   }, []);
@@ -56,7 +64,7 @@ export function BackgroundMusic({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (hasUserMuted) {
-      window.localStorage.setItem(STORAGE_HAS_MUTED, 'true');
+      window.localStorage.setItem(STORAGE_HAS_MUTED, "true");
     }
   }, [hasUserMuted]);
 
@@ -90,7 +98,8 @@ export function BackgroundMusic({ children }: { children: React.ReactNode }) {
       const step = (now: number) => {
         const progress = Math.min(1, (now - startTime) / duration);
         const eased = 1 - Math.pow(1 - progress, 3);
-        audio.volume = startVolume + (target - startVolume) * eased;
+        const nextVolume = startVolume + (target - startVolume) * eased;
+        audio.volume = Math.min(1, Math.max(0, nextVolume));
         if (progress < 1) {
           fadeFrame.current = requestAnimationFrame(step);
         }
@@ -98,7 +107,7 @@ export function BackgroundMusic({ children }: { children: React.ReactNode }) {
 
       fadeFrame.current = requestAnimationFrame(step);
     },
-    [cancelFade]
+    [cancelFade],
   );
 
   const fadeOut = useCallback(
@@ -114,7 +123,7 @@ export function BackgroundMusic({ children }: { children: React.ReactNode }) {
         }, duration + 50);
       }
     },
-    [fadeTo]
+    [fadeTo],
   );
 
   const fadeIn = useCallback(
@@ -132,19 +141,25 @@ export function BackgroundMusic({ children }: { children: React.ReactNode }) {
         setIsPlaying(false);
       }
     },
-    [cancelFade, fadeTo]
+    [cancelFade, fadeTo],
   );
 
   const ensureAudioContext = useCallback(async () => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
     if (!audioContextRef.current) {
-      const AudioContextConstructor = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+      const AudioContextConstructor =
+        window.AudioContext ||
+        (window as typeof window & { webkitAudioContext?: typeof AudioContext })
+          .webkitAudioContext;
       if (AudioContextConstructor) {
         audioContextRef.current = new AudioContextConstructor();
       }
     }
 
-    if (audioContextRef.current && audioContextRef.current.state === 'suspended') {
+    if (
+      audioContextRef.current &&
+      audioContextRef.current.state === "suspended"
+    ) {
       try {
         await audioContextRef.current.resume();
       } catch (error) {
@@ -157,7 +172,8 @@ export function BackgroundMusic({ children }: { children: React.ReactNode }) {
     hasInteracted.current = true;
     await ensureAudioContext();
 
-    const storedHasMuted = window.localStorage.getItem(STORAGE_HAS_MUTED) === 'true';
+    const storedHasMuted =
+      window.localStorage.getItem(STORAGE_HAS_MUTED) === "true";
     if (hasUserMuted || storedHasMuted) return;
 
     if (!isPlaying) {
@@ -179,28 +195,25 @@ export function BackgroundMusic({ children }: { children: React.ReactNode }) {
     }
   }, [ensureAudioContext, fadeIn, fadeOut, isMuted]);
 
-  const playTone = useCallback(
-    (frequencies: number[], duration = 1.2) => {
-      if (!hasInteracted.current || !audioContextRef.current) return;
-      const context = audioContextRef.current;
-      const now = context.currentTime;
-      const gain = context.createGain();
-      gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(0.08, now + 0.05);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-      gain.connect(context.destination);
+  const playTone = useCallback((frequencies: number[], duration = 1.2) => {
+    if (!hasInteracted.current || !audioContextRef.current) return;
+    const context = audioContextRef.current;
+    const now = context.currentTime;
+    const gain = context.createGain();
+    gain.gain.setValueAtTime(0, now);
+    gain.gain.linearRampToValueAtTime(0.08, now + 0.05);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+    gain.connect(context.destination);
 
-      frequencies.forEach((freq, index) => {
-        const osc = context.createOscillator();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, now + index * 0.06);
-        osc.connect(gain);
-        osc.start(now + index * 0.06);
-        osc.stop(now + duration);
-      });
-    },
-    []
-  );
+    frequencies.forEach((freq, index) => {
+      const osc = context.createOscillator();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, now + index * 0.06);
+      osc.connect(gain);
+      osc.start(now + index * 0.06);
+      osc.stop(now + duration);
+    });
+  }, []);
 
   const playChime = useCallback(() => {
     playTone([523.25, 659.25, 783.99], 1.4);
@@ -218,17 +231,17 @@ export function BackgroundMusic({ children }: { children: React.ReactNode }) {
     };
 
     const handleVisibility = () => {
-      if (document.visibilityState === 'hidden') {
+      if (document.visibilityState === "hidden") {
         fadeOut(800, true);
       }
     };
 
-    window.addEventListener('pagehide', handlePageHide);
-    document.addEventListener('visibilitychange', handleVisibility);
+    window.addEventListener("pagehide", handlePageHide);
+    document.addEventListener("visibilitychange", handleVisibility);
 
     return () => {
-      window.removeEventListener('pagehide', handlePageHide);
-      document.removeEventListener('visibilitychange', handleVisibility);
+      window.removeEventListener("pagehide", handlePageHide);
+      document.removeEventListener("visibilitychange", handleVisibility);
     };
   }, [fadeOut, isPlaying]);
 
@@ -239,9 +252,16 @@ export function BackgroundMusic({ children }: { children: React.ReactNode }) {
       startFromInteraction,
       toggleMute,
       playChime,
-      playSparkle
+      playSparkle,
     }),
-    [isPlaying, isMuted, playChime, playSparkle, startFromInteraction, toggleMute]
+    [
+      isPlaying,
+      isMuted,
+      playChime,
+      playSparkle,
+      startFromInteraction,
+      toggleMute,
+    ],
   );
 
   return (

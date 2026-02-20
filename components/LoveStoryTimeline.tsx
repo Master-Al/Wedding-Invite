@@ -82,8 +82,6 @@ function StoryCard({
 
   const imageY = useTransform(scrollYProgress, [0, 1], ['8%', '-6%']);
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, story.zoom]);
-  const textY = useTransform(scrollYProgress, [0, 1], [20, 0]);
-  const textOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
     <div ref={ref} className="relative">
@@ -138,7 +136,13 @@ function StoryCard({
             </div>
           )}
         </div>
-        <motion.div style={{ y: textY, opacity: textOpacity }} className="space-y-4">
+        <motion.div
+          className="space-y-4"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: 'easeOut' }}
+          viewport={{ once: true, amount: 0.4 }}
+        >
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-burgundy/60">{story.year}</p>
             <h3 className="mt-3 text-2xl font-semibold text-burgundy">{story.title}</h3>
