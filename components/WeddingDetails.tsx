@@ -22,6 +22,9 @@ const details = [
 ];
 
 export default function WeddingDetails() {
+  const mapsUrl =
+    'https://www.google.com/maps/search/?api=1&query=Kamura%20Fusion%20Resto%2C%20%236%20Zabarte%20Rd%2C%20Novaliches%2C%20Quezon%20City%2C%20Philippines%201124';
+
   return (
     <section className="relative border-t border-sage/30 bg-gradient-to-b from-sage/20 via-ivory/80 to-ivory px-6 py-24">
       <div className="pointer-events-none absolute inset-0">
@@ -75,7 +78,9 @@ export default function WeddingDetails() {
 
         <div className="mt-10 flex justify-center">
           <motion.a
-            href="#"
+            href={mapsUrl}
+            target="_blank"
+            rel="noreferrer"
             className="rounded-full border border-gold/70 bg-burgundy px-8 py-3 text-sm uppercase tracking-[0.3em] text-ivory shadow-candle-soft transition hover:shadow-gold-glow"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}

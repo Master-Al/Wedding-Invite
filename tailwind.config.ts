@@ -15,8 +15,8 @@ const config: Config = {
         softGold: '#c6a75e',
         gold: '#c6a75e',
         burgundy: '#7a3142',
-        sage: '#9caf88',
-        sageDark: '#8c9a78',
+        sage: '#8e9b88',
+        sageDark: '#7c8876',
         cocoa: '#2f1c1f'
       },
       fontFamily: {

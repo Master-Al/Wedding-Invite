@@ -75,13 +75,13 @@ export default function EnvelopeAnimation() {
         <div className="relative h-60 w-full [perspective:1200px]">
           <div className="absolute inset-x-12 bottom-1 h-5 rounded-full bg-cocoa/15 blur-2xl" />
           <div className="absolute inset-0 z-10 overflow-hidden rounded-[30px] border border-softGold/45 shadow-[0_22px_50px_rgba(47,28,31,0.18)]">
-            <div className="absolute inset-0 bg-gradient-to-b from-sage/35 via-sage/45 to-sage/55" />
+            <div className="absolute inset-0 bg-gradient-to-b from-sage/30 via-sage/40 to-sage/50" />
             <div className="absolute inset-3 rounded-[24px] border border-white/30" />
             <div className="absolute inset-x-14 top-[58px] h-px bg-softGold/35" />
             <div className="absolute inset-x-10 bottom-10 h-px bg-softGold/20" />
 
             <motion.div
-              className="absolute inset-x-0 top-0 z-30 h-28 rounded-t-[30px] bg-gradient-to-b from-ivory/95 via-sage/25 to-sage/35 shadow-[0_10px_20px_rgba(47,28,31,0.18)]"
+              className="absolute inset-x-0 top-0 z-30 h-28 rounded-t-[30px] bg-gradient-to-b from-ivory/95 via-sage/20 to-sage/30 shadow-[0_10px_20px_rgba(47,28,31,0.18)]"
               style={{
                 clipPath: 'polygon(0 0, 100% 0, 50% 100%)',
                 transformOrigin: 'top',
