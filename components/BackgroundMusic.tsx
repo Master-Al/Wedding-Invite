@@ -127,7 +127,7 @@ export function BackgroundMusic({ children }: { children: React.ReactNode }) {
   );
 
   const fadeIn = useCallback(
-    async (duration = 32000) => {
+    async (duration = 3200) => {
       const audio = audioRef.current;
       if (!audio) return;
 

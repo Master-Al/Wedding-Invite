@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
-import { useBackgroundMusic } from './BackgroundMusic';
+import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { useBackgroundMusic } from "./BackgroundMusic";
 
 type Story = {
   id: string;
@@ -20,54 +20,54 @@ type Story = {
 
 const stories: Story[] = [
   {
-    id: 'beginning',
-    title: 'Our Beautiful Beginning',
-    year: 'December 28, 2020',
+    id: "beginning",
+    title: "Our Beautiful Beginning",
+    year: "December 28, 2020",
     paragraphs: [
-      'December 28, 2020 - the day she finally answered me \"Yes\" after a long season of courtship.',
-      'That year was filled with patience, hope, and heartfelt prayers. When she said yes, it was not just the start of a relationship - it was the beginning of shared dreams.',
-      'From that day on, we began building goals together, supporting each other\'s ambitions, and choosing to enjoy every simple moment of life side by side.'
+      'December 28, 2020 - the day Joan finally said \"Yes\" after a season of patient courtship.',
+      'That year was filled with hope, prayer, and quiet trust. Her yes was more than the start of a relationship - it was the beginning of shared dreams.',
+      "From then on, Al and Joan began building goals together, supporting each other's ambitions, and choosing joy in life's simplest moments.",
     ],
-    image: '/images/1stdate.jpg',
-    zoom: 1.08
+    image: "/images/1stdate.jpg",
+    zoom: 1.08,
   },
   {
-    id: 'proposal',
-    title: 'The Day I Asked Forever',
-    year: 'December 28',
+    id: "proposal",
+    title: "The Day I Asked Forever",
+    year: "December 28",
     paragraphs: [
-      'One morning, I (AL) realized with certainty that I wanted Joan to be part of my life forever.',
-      'I wanted to build a family with her, grow old with her, and create a future together.',
-      'On December 28, I asked her to marry me - and that night became one of the most unforgettable and beautiful moments of our lives.'
+      "One morning, Al knew with certainty that Joan belonged beside him for life.",
+      "He dreamed of building a family with her, growing old together, and creating a future side by side.",
+      "On December 28, he asked her to marry him - and that night became one of their most unforgettable, beautiful memories.",
     ],
-    image: '/images/proposal.png',
+    image: "/images/proposal.png",
     zoom: 1.05,
     glow: true,
-    sparkle: true
+    sparkle: true,
   },
   {
-    id: 'promise',
-    title: 'Stronger Together',
-    year: 'Our Prenup & Promise',
+    id: "promise",
+    title: "Stronger Together",
+    year: "Our Prenup & Promise",
     paragraphs: [
-      'This is our prenup - a reflection of our love and commitment.',
-      'We have faced challenges along the way, but we chose to fight for our love. We pushed forward toward this wedding day with faith and determination.',
-      'We decided to face the future and its challenges together.',
-      'We are stronger when we are together.',
-      'We comfort each other in difficult times, and we celebrate together in our victories.'
+      "This prenup reflects their love, commitment, and promise.",
+      "They faced challenges, but chose to fight for each other and move forward with faith.",
+      "Together, they decided to face the future as one.",
+      "They are stronger together.",
+      "They comfort each other in hard times and celebrate every victory side by side.",
     ],
-    image: '/images/final.jpg',
+    image: "/images/final.jpg",
     zoom: 1.04,
-    objectPosition: 'center 35%',
-    underlineFinal: true
-  }
+    objectPosition: "center 35%",
+    underlineFinal: true,
+  },
 ];
 
 function StoryCard({
   story,
   index,
   isLast,
-  onProposalEnter
+  onProposalEnter,
 }: {
   story: Story;
   index: number;
@@ -77,10 +77,10 @@ function StoryCard({
   const ref = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['0.9 1', '0.2 0.4']
+    offset: ["0.9 1", "0.2 0.4"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ['8%', '-6%']);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["8%", "-6%"]);
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, story.zoom]);
 
   return (
@@ -92,7 +92,7 @@ function StoryCard({
         transition={{ duration: 0.9, delay: index * 0.1 }}
         viewport={{ once: true, amount: 0.35 }}
         onViewportEnter={() => {
-          if (story.id === 'proposal') {
+          if (story.id === "proposal") {
             onProposalEnter();
           }
         }}
@@ -103,7 +103,7 @@ function StoryCard({
               className="absolute inset-0 rounded-[28px] bg-gold/10"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              transition={{ duration: 1.4, ease: 'easeOut' }}
+              transition={{ duration: 1.4, ease: "easeOut" }}
               viewport={{ once: true }}
             />
           )}
@@ -117,20 +117,25 @@ function StoryCard({
               fill
               sizes="(max-width: 768px) 100vw, 40vw"
               className="object-cover"
-              style={{ objectPosition: story.objectPosition ?? 'center' }}
+              style={{ objectPosition: story.objectPosition ?? "center" }}
             />
             <div className="pointer-events-none absolute inset-0 bg-champagne/25 mix-blend-soft-light" />
           </motion.div>
           {story.sparkle && (
             <div className="pointer-events-none absolute inset-0">
-              {['20%', '68%', '52%'].map((left, sparkleIndex) => (
+              {["20%", "68%", "52%"].map((left, sparkleIndex) => (
                 <motion.span
                   key={left}
                   className="absolute top-[35%] h-2 w-2 rounded-full bg-softGold/80"
                   style={{ left }}
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: [0, 0.9, 0], scale: [0, 1, 0.4] }}
-                  transition={{ duration: 2.4, delay: sparkleIndex * 0.4, repeat: Infinity, repeatDelay: 2 }}
+                  transition={{
+                    duration: 2.4,
+                    delay: sparkleIndex * 0.4,
+                    repeat: Infinity,
+                    repeatDelay: 2,
+                  }}
                 />
               ))}
             </div>
@@ -140,12 +145,16 @@ function StoryCard({
           className="space-y-4"
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: 'easeOut' }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
           viewport={{ once: true, amount: 0.4 }}
         >
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-burgundy/60">{story.year}</p>
-            <h3 className="mt-3 text-2xl font-semibold text-burgundy">{story.title}</h3>
+            <p className="text-xs uppercase tracking-[0.3em] text-burgundy/60">
+              {story.year}
+            </p>
+            <h3 className="mt-3 text-2xl font-semibold text-burgundy">
+              {story.title}
+            </h3>
           </div>
           <motion.div
             className="h-px w-20 bg-gold/70"
@@ -153,7 +162,7 @@ function StoryCard({
             whileInView={{ opacity: 1, scaleX: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            style={{ transformOrigin: 'left' }}
+            style={{ transformOrigin: "left" }}
           />
           <div className="space-y-4 text-base text-burgundy/75">
             {story.paragraphs.map((paragraph, paragraphIndex) => (
@@ -167,7 +176,7 @@ function StoryCard({
               whileInView={{ opacity: 1, scaleX: 1 }}
               transition={{ duration: 1.1, delay: 0.4 }}
               viewport={{ once: true }}
-              style={{ transformOrigin: 'left' }}
+              style={{ transformOrigin: "left" }}
             />
           )}
         </motion.div>
@@ -180,7 +189,7 @@ function StoryCard({
           whileInView={{ opacity: 1, scaleX: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          style={{ transformOrigin: 'center' }}
+          style={{ transformOrigin: "center" }}
         />
       )}
     </div>
@@ -192,10 +201,10 @@ export default function LoveStoryTimeline() {
   const hasPlayed = useRef(false);
 
   const floatingLights = [
-    { left: '8%', top: '18%', size: 'h-24 w-24', opacity: '0.4' },
-    { left: '70%', top: '12%', size: 'h-20 w-20', opacity: '0.3' },
-    { left: '18%', top: '62%', size: 'h-32 w-32', opacity: '0.35' },
-    { left: '78%', top: '68%', size: 'h-28 w-28', opacity: '0.25' }
+    { left: "8%", top: "18%", size: "h-24 w-24", opacity: "0.4" },
+    { left: "70%", top: "12%", size: "h-20 w-20", opacity: "0.3" },
+    { left: "18%", top: "62%", size: "h-32 w-32", opacity: "0.35" },
+    { left: "78%", top: "68%", size: "h-28 w-28", opacity: "0.25" },
   ];
 
   return (
@@ -212,10 +221,15 @@ export default function LoveStoryTimeline() {
 
       <div className="relative mx-auto max-w-5xl">
         <div className="text-center">
-          <p className="lux-heading text-xs tracking-[0.4em] text-burgundy/70">Our Story</p>
-          <h2 className="mt-4 text-3xl font-semibold text-burgundy sm:text-4xl">A Love Letter in Three Acts</h2>
+          <p className="lux-heading text-xs tracking-[0.4em] text-burgundy/70">
+            Our Story
+          </p>
+          <h2 className="mt-4 text-3xl font-semibold text-burgundy sm:text-4xl">
+            A Love Letter in Three Acts
+          </h2>
           <p className="mt-4 text-base text-burgundy/70 sm:text-lg text-balance">
-            Each chapter unfolds like a romantic short film, illuminated by candlelight and devotion.
+            Each chapter unfolds like a romantic short film, illuminated by
+            candlelight and devotion.
           </p>
         </div>
 

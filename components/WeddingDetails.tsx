@@ -49,7 +49,7 @@ export default function WeddingDetails() {
             style={{ transformOrigin: "center" }}
           />
           <p className="mt-4 text-base text-burgundy/70 sm:text-lg">
-            Join us for a full day of elegance, romance, and candlelight.
+            Join us for an intimate day of elegance, romance, and candlelight.
           </p>
         </div>
 
