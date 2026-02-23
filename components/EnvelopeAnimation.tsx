@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import { useBackgroundMusic } from "./BackgroundMusic";
@@ -104,14 +105,14 @@ export default function EnvelopeAnimation() {
             </motion.div>
           </div>
 
-          <div className="absolute left-1/2 top-[104px] z-50 flex h-12 w-12 -translate-x-1/2 items-center justify-center rounded-full border border-softGold/60 text-[10px] tracking-[0.2em] text-ivory shadow-[0_10px_18px_rgba(47,28,31,0.2)]">
-            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_30%_30%,#8a3c4d_0%,#7a3142_60%,#5a1f30_100%)]" />
-            <div className="absolute inset-[2px] rounded-full border border-white/10" />
-            <div className="absolute left-[28%] top-[22%] h-2 w-2 rounded-full bg-white/15 blur-[1px]" />
-            <div className="absolute right-[18%] bottom-[16%] h-2 w-2 rounded-full bg-black/12 blur-[2px]" />
-            <span className="relative handwriting text-sm text-ivory/85">
-              A & J
-            </span>
+          <div className="absolute left-1/2 top-[92px] z-50 h-[80px] w-[80px] -translate-x-1/2 overflow-hidden rounded-full border border-softGold/60 bg-ivory shadow-[0_10px_18px_rgba(47,28,31,0.2)]">
+            <Image
+              src="/images/wedding-logo.png"
+              alt="Al & Joan wedding logo"
+              fill
+              sizes="80px"
+              className="object-contain p-1"
+            />
           </div>
         </div>
       </motion.button>

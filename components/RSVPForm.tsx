@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { FormEvent, useEffect, useState } from 'react';
 import { useBackgroundMusic } from './BackgroundMusic';
@@ -147,6 +148,13 @@ export default function RSVPForm() {
 
           {isSubmitted && (
             <div className="absolute inset-4 flex flex-col items-center justify-center gap-3 rounded-[32px] border border-softGold/60 bg-burgundy/80 px-6 text-center text-sm text-ivory shadow-gold-glow">
+              <Image
+                src="/images/wedding-logo.png"
+                alt="Al & Joan wedding logo"
+                width={56}
+                height={56}
+                className="object-contain"
+              />
               <p>Thank you for celebrating our love in this special place.</p>
               <button
                 type="button"
