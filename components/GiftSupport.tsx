@@ -9,7 +9,6 @@ const qrItems = [
     title: "GCash",
     detail: "For those who wish to support",
     image: "/images/qr-gcash.jpg",
-    size: "xl",
   },
   {
     title: "BPI (Al Pandis)",
@@ -60,16 +59,14 @@ export default function GiftSupport() {
               <button
                 type="button"
                 onClick={() => setActive({ title: item.title, image: item.image })}
-                className={`relative mx-auto block overflow-hidden rounded-[24px] border border-softGold/40 bg-white/80 transition hover:shadow-gold-glow ${
-                  item.size === "xl" ? "h-80 w-80" : "h-72 w-72"
-                }`}
+                className="relative mx-auto block h-72 w-72 overflow-hidden rounded-[24px] border border-softGold/40 bg-white/80 transition hover:shadow-gold-glow"
                 aria-label={`Open ${item.title} QR code`}
               >
                 <Image
                   src={item.image}
                   alt={`${item.title} QR`}
                   fill
-                  sizes={item.size === "xl" ? "320px" : "288px"}
+                  sizes="288px"
                   className="object-contain p-5"
                 />
               </button>
