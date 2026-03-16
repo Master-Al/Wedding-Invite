@@ -4,6 +4,7 @@ import WeddingDetails from "../components/WeddingDetails";
 import LoveStoryTimeline from "../components/LoveStoryTimeline";
 import RSVPForm from "../components/RSVPForm";
 import CountdownTimer from "../components/CountdownTimer";
+import GiftSupport from "../components/GiftSupport";
 
 export default function Home() {
   const petals = [
@@ -74,6 +75,7 @@ export default function Home() {
       <WeddingDetails />
       <CountdownTimer />
       <LoveStoryTimeline />
+      <GiftSupport />
       <RSVPForm />
 
       <footer className="pb-20 pt-10 text-center text-xs uppercase tracking-[0.3em] text-burgundy/60">
