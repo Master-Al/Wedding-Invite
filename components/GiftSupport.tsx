@@ -1,13 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
 
 const qrItems = [
   {
     title: "GCash",
     detail: "For those who wish to support",
     image: "/images/qr-gcash.jpg",
+    size: "xl",
   },
   {
     title: "BPI (Al Pandis)",
@@ -22,6 +24,10 @@ const qrItems = [
 ];
 
 export default function GiftSupport() {
+  const [active, setActive] = useState<{ title: string; image: string } | null>(
+    null,
+  );
+
   return (
     <section className="border-t border-sage/30 bg-sage/10 px-6 py-24">
       <div className="mx-auto max-w-5xl">
@@ -51,15 +57,22 @@ export default function GiftSupport() {
               <div className="mb-4 text-sm uppercase tracking-[0.25em] text-burgundy/70">
                 {item.title}
               </div>
-              <div className="relative mx-auto h-56 w-56 overflow-hidden rounded-[24px] border border-softGold/40 bg-white/80">
+              <button
+                type="button"
+                onClick={() => setActive({ title: item.title, image: item.image })}
+                className={`relative mx-auto block overflow-hidden rounded-[24px] border border-softGold/40 bg-white/80 transition hover:shadow-gold-glow ${
+                  item.size === "xl" ? "h-80 w-80" : "h-72 w-72"
+                }`}
+                aria-label={`Open ${item.title} QR code`}
+              >
                 <Image
                   src={item.image}
                   alt={`${item.title} QR`}
                   fill
-                  sizes="224px"
-                  className="object-contain p-4"
+                  sizes={item.size === "xl" ? "320px" : "288px"}
+                  className="object-contain p-5"
                 />
-              </div>
+              </button>
               <p className="mt-4 text-xs uppercase tracking-[0.25em] text-burgundy/60">
                 {item.detail}
               </p>
@@ -71,6 +84,56 @@ export default function GiftSupport() {
           Support is optional and never expected.
         </p>
       </div>
+
+      <AnimatePresence>
+        {active && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-cocoa/50 px-6 py-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActive(null)}
+          >
+            <motion.div
+              className="relative w-full max-w-xl rounded-[28px] border border-softGold/50 bg-ivory/95 p-6 shadow-gold-soft"
+              initial={{ scale: 0.96, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.96, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={() => setActive(null)}
+                className="absolute right-4 top-4 rounded-full border border-softGold/50 px-3 py-1 text-xs uppercase tracking-[0.3em] text-burgundy/70"
+              >
+                Close
+              </button>
+              <div className="text-center">
+                <p className="text-xs uppercase tracking-[0.3em] text-burgundy/60">
+                  {active.title}
+                </p>
+                <div
+                  className={`relative mx-auto mt-4 overflow-hidden rounded-[24px] border border-softGold/40 bg-white/90 ${
+                    active.title === "GCash" ? "h-96 w-96" : "h-80 w-80"
+                  }`}
+                >
+                  <Image
+                    src={active.image}
+                    alt={`${active.title} QR`}
+                    fill
+                    sizes={active.title === "GCash" ? "384px" : "320px"}
+                    className="object-contain p-6"
+                  />
+                </div>
+                <p className="mt-4 text-xs uppercase tracking-[0.3em] text-burgundy/60">
+                  Tap outside to close
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
