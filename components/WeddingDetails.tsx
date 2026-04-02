@@ -16,14 +16,14 @@ const details = [
   },
   {
     title: "Time",
-    time: "2:00 PM - 6:00 PM",
+    time: "3:00 PM - 7:00 PM",
     description: "Candlelit reception and dinner service",
   },
 ];
 
 export default function WeddingDetails() {
   const mapsUrl =
-    'https://www.google.com/maps/search/?api=1&query=Kamura%20Fusion%20Resto%2C%20%236%20Zabarte%20Rd%2C%20Novaliches%2C%20Quezon%20City%2C%20Philippines%201124';
+    "https://www.google.com/maps/search/?api=1&query=Kamura%20Fusion%20Resto%2C%20%236%20Zabarte%20Rd%2C%20Novaliches%2C%20Quezon%20City%2C%20Philippines%201124";
 
   return (
     <section className="relative border-t border-sage/30 bg-gradient-to-b from-sage/20 via-ivory/80 to-ivory px-6 py-24">
