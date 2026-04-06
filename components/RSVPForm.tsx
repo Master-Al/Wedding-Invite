@@ -14,7 +14,7 @@ export default function RSVPForm() {
 
   useEffect(() => {
     const now = new Date();
-    const cutoff = new Date("2026-04-04T23:59:59");
+    const cutoff = new Date("2026-04-06T23:59:59");
     setIsRsvpOpen(now.getTime() <= cutoff.getTime());
   }, []);
 
