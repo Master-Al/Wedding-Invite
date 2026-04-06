@@ -12,6 +12,7 @@ export default function RSVPForm() {
   const [error, setError] = useState<string | null>(null);
   const [isRsvpOpen, setIsRsvpOpen] = useState<boolean | null>(null);
 
+
   useEffect(() => {
     const now = new Date();
     const cutoff = new Date("2026-04-06T23:59:59");
@@ -79,7 +80,7 @@ export default function RSVPForm() {
             Reserve Your Place
           </h2>
           <p className="mt-4 text-base text-burgundy/70 sm:text-lg">
-            Your presence would mean the world. Save your seats by April 4,
+            Your presence would mean the world. Save your seats by April 6,
             2026.
           </p>
         </div>
