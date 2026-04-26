@@ -20,25 +20,42 @@ type Story = {
 
 const stories: Story[] = [
   {
-    id: "beginning",
-    title: "Our Beautiful Beginning",
-    year: "December 28, 2020",
+    id: "greeting",
+    title: "A Simple Greeting",
+    year: "Where It All Began",
     paragraphs: [
-      'December 28, 2020 - the day Joan finally said \"Yes\" after a season of patient courtship.',
-      'That year was filled with hope, prayer, and quiet trust. Her yes was more than the start of a relationship - it was the beginning of shared dreams.',
-      "From then on, Al and Joan began building goals together, supporting each other's ambitions, and choosing joy in life's simplest moments.",
+      'It all began with a simple message from Al: "Merry Christmas. May God bless you always." What seemed like a small greeting quietly opened the first page of their story.',
+      "Sometime later, they found a reason to speak again. Al had first thought of introducing Joan to a friend who needed someone to talk to after seeing her on his newsfeed, but life had a gentler plan. Instead, it was Al and Joan who slowly formed a meaningful connection.",
+      "Casual conversations became warmer with time. On Joan's birthday, a greeting turned into a longer exchange and eventually into an invitation to her home to celebrate.",
+      "Al never forgot that birthday - three sticks of barbecue, a little rice, and not even a glass of water. Somehow, that lighthearted memory became one of the small details that made their beginning unforgettable.",
+      "As the days passed, they discovered how much they shared: a love for coffee, mobile games, and the quiet joy of simply understanding one another.",
     ],
-    image: "/images/1stdate.jpg",
+    image: "/images/greeetings.jpg",
     zoom: 1.08,
   },
   {
-    id: "proposal",
-    title: "The Day I Asked Forever",
-    year: "December 28",
+    id: "yes",
+    title: "The Sweet Yes",
+    year: "December 28, 2020",
     paragraphs: [
-      "One morning, Al knew with certainty that Joan belonged beside him for life.",
-      "He dreamed of building a family with her, growing old together, and creating a future side by side.",
-      "On December 28, he asked her to marry him - and that night became one of their most unforgettable, beautiful memories.",
+      "As weeks turned into months, Al began courting Joan, and their connection grew deeper with every conversation.",
+      'There came a moment when he thought the day might end in disappointment. While they were eating at Wendy\'s on December 28, 2020, Joan suddenly said, "Stop courting me."',
+      "For a brief second, confusion filled the moment - until Joan followed it with the words that changed everything: \"Let's be together. You can stop courting me - I'm saying yes to you.\"",
+      "Uncertainty turned into overwhelming joy. Al immediately shared the beautiful news with his close friends Ace, Harry, and Jude.",
+      "Days passed, then months, then years, and through it all their relationship remained strong.",
+    ],
+    image: "/images/1stdate.jpg",
+    zoom: 1.06,
+  },
+  {
+    id: "proposal",
+    title: "The Promise of Forever",
+    year: "Dingalan, December 28, 2023",
+    paragraphs: [
+      "By 2023, Al knew with greater clarity what his heart had long been telling him: he was ready for a future with Joan and did not want to lose her.",
+      "A simple trip to the mall with a friend led him to a ring. Soon after, he told his parents that he wanted to marry Joan, and they gave their full support. He then went to Joan's home to honor her parents with news of the proposal he was planning in Dingalan.",
+      "Later that same year, Al and Joan traveled to Dingalan to celebrate their third anniversary. There, Al knelt and expressed the sincerity of his love, asking Joan to spend forever with him.",
+      "It became one of the most unforgettable and beautiful moments of their journey together.",
     ],
     image: "/images/proposal.png",
     zoom: 1.05,
@@ -47,14 +64,14 @@ const stories: Story[] = [
   },
   {
     id: "promise",
-    title: "Stronger Together",
-    year: "Our Prenup & Promise",
+    title: "Stronger Through It All",
+    year: "April 28, 2026",
     paragraphs: [
-      "This prenup reflects their love, commitment, and promise.",
-      "They faced challenges, but chose to fight for each other and move forward with faith.",
-      "Together, they decided to face the future as one.",
-      "They are stronger together.",
-      "They comfort each other in hard times and celebrate every victory side by side.",
+      "They began planning their wedding, but the road ahead was not without challenges. Again and again, it seemed as though something was trying to stand in the way of the life they were building together.",
+      "Still, Al and Joan did not give up. They worked hard for their wedding, pushed through every obstacle, and held on with faith until the right time finally came.",
+      "No matter how many times their love was tested, they never let go of each other.",
+      "And now, here they are - Al and Joan - ready to become one on April 28, 2026, a Tuesday.",
+      "What began with a simple greeting has led them to forever.",
     ],
     image: "/images/final.jpg",
     zoom: 1.04,
@@ -225,11 +242,11 @@ export default function LoveStoryTimeline() {
             Our Story
           </p>
           <h2 className="mt-4 text-3xl font-semibold text-burgundy sm:text-4xl">
-            A Love Letter in Three Acts
+            This Is Our Love Story
           </h2>
           <p className="mt-4 text-base text-burgundy/70 sm:text-lg text-balance">
-            Each chapter unfolds like a romantic short film, illuminated by
-            candlelight and devotion.
+            From a simple Christmas greeting to the promise of forever, each
+            chapter has been shaped by faith, laughter, and steadfast love.
           </p>
         </div>
 
